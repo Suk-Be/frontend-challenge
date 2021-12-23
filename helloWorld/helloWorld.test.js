@@ -35,4 +35,38 @@ describe('HelloWorld', () => {
 		// screen.getByRole('');
 		expect(screen.getByRole('textbox')).toBeInTheDocument();
 	});
+
+	test('testing library features grab variants', () => {
+		// getBy returns an element or an error.
+		// It's a convenient side-effect of getBy that it returns an error (easy for assertion)
+		// However, this makes it difficult to check for elements which shouldn't be there
+
+		/*
+    // queryBy
+    queryByText
+    queryByRole
+    queryByLabelText
+    queryByPlaceholderText
+    queryByAltText
+    queryByDisplayValue
+    */
+
+		/*
+    // findBy
+    findByText
+    findByRole
+    findByLabelText
+    findByPlaceholderText
+    findByAltText
+    findByDisplayValue
+    */
+
+		render(<HelloWorld />);
+
+		// getTextBy fails
+		// expect(screen.getByText(/Searches for JavaScript/)).toBeNull();
+
+    // queryBy works
+    expect(screen.queryByText(/Searches for JavaScript/)).toBeNull();
+	});
 });
