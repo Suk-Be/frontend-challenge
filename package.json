@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint",
     "script": "pre-commit",
-    "test": "jest",
+    "test": "jest --watch",
     "prepare": "husky install",
     "pre-commit": "next lint"
   },
