@@ -1,5 +1,3 @@
-import '../styles/globals.css';
-
 /**
  * Represents different web vitals
  * @typedef {string} metricName
