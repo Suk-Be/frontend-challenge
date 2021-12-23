@@ -1,7 +1,6 @@
-import styles from './PageLayout.module.css';
 import Link from 'next/link';
 import Head from 'next/head';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export default function Layout({
 	children,
@@ -19,8 +18,8 @@ export default function Layout({
 			{!homePage && <main>{children}</main>}
 			{homePage && (
 				<>
-					<main className={styles.homePage}>{children}</main>
-					<footer className={styles.toTable}>
+					<StyledMain>{children}</StyledMain>
+					<StyledFooter>
 						<nav>
 							<Link href={`/table`}>
 								<a>
@@ -28,13 +27,14 @@ export default function Layout({
 								</a>
 							</Link>
 						</nav>
-					</footer>
+					</StyledFooter>
 				</>
 			)}
 		</div>
 	);
 }
 
+// general styling every page uses
 const GlobalStyle = createGlobalStyle`
 	html,
 	body {
@@ -63,3 +63,16 @@ const GlobalStyle = createGlobalStyle`
 		font-size: 1rem;
 	}
 `;
+
+// layout container styling
+const containerStyles = `
+	max-width: 70vw;
+	padding: 0 1rem;
+	margin: 3rem auto 6rem;
+`
+const StyledMain = styled('main')`
+	${containerStyles}
+`
+const StyledFooter = styled('footer')`
+	${containerStyles}
+`

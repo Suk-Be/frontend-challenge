@@ -1,18 +1,18 @@
 import Link from 'next/link';
 import { DatesContainer } from './datesContainer';
 import { StarContainer } from './starContainer';
-import styles from './TBody.module.css';
+import styled from 'styled-components';
 
 export const TBody = ({ RepoData }) => {
 	const content = RepoData.map((RepoItem) => (
 		<tr key={RepoItem.id}>
 			<td>
-				<details>
-					<summary className={styles.summary}>{RepoItem.name}</summary>
+				<StyledDetails>
+					<summary className="summary">{RepoItem.name}</summary>
 					<ul>
 						<li>
 							<Link href={RepoItem.html_url}>
-								<a className={styles.link} target="_blank">
+								<a className="link" target="_blank">
 									visit repo
 								</a>
 							</Link>
@@ -23,13 +23,32 @@ export const TBody = ({ RepoData }) => {
 						/>
 						<StarContainer starCount={RepoItem.stargazers_count} />
 					</ul>
-				</details>
+				</StyledDetails>
 			</td>
 			<td>
-				<p className={styles.description}>{RepoItem.description}</p>
+				<p className="description">{RepoItem.description}</p>
 			</td>
 		</tr>
 	));
 
 	return <tbody id="renderTable">{content}</tbody>;
 };
+
+const StyledDetails = styled('details')`
+	.summary {
+		cursor: pointer;
+	}
+
+	.link {
+		display: inline-block;
+		padding-bottom: 0.3rem;
+		text-decoration: underline;
+	}
+
+	.description {
+		color: #4a4a4a;
+		word-wrap: break-word;
+		padding: 0;
+		margin: 0;
+	}
+`;
