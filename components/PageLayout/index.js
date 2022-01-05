@@ -36,7 +36,9 @@ export default function Layout({
 
 // general styling every page uses
 const GlobalStyle = createGlobalStyle`
-	html,
+	html {
+		box-sizing: border-box;
+	}
 	body {
 		padding: 0;
 		margin: 0;
@@ -51,8 +53,8 @@ const GlobalStyle = createGlobalStyle`
 		text-decoration: none;
 	}
 
-	* {
-		box-sizing: border-box;
+	*, *:before, *:after {
+		box-sizing: inherit;
 	}
 
 	h1 {
