@@ -1,34 +1,28 @@
 import Layout from '../../components/PageLayout';
-import { MetaData } from '../../staticData/MetaData';
-import { TBody } from '../../components/TBody';
+import { tablePage } from '../../staticData/MetaData';
+import { fetchData, githubURL as url } from '../../components/utils/fetch';
+import { TBody } from '../../components/table/tbody';
 import styled from 'styled-components';
 
 // prerender on server side
 export async function getStaticProps() {
-	const res = await fetch(
-		`https://api.github.com/search/repositories?q=created:%3E2017-01-10&sort=stars&order=desc`
-	);
-	const data = await res.json();
+	const data = await fetchData(url);
 
-	if (!data) {
-		return {
-			notFound: true,
-		};
-	}
-
-	const filtered = await data.items.sort((a, b) => {
+	const latestDataFirst = await data.items.sort((a, b) => {
 		return new Date(b.updated_at) - new Date(a.updated_at);
 	});
 
+	const slicedData = await latestDataFirst.slice(0, 7)
+
 	return {
 		props: {
-			MetaData,
-			RepoData: filtered,
+			tablePage,
+			RepoData: slicedData,
 		},
 	};
 }
 
-function Page({ MetaData: { tablePage }, RepoData }) {
+function Page({ tablePage, RepoData }) {
 	return (
 		<Layout siteMetaContent={tablePage}>
 			<StyledDiv>
@@ -118,6 +112,10 @@ const StyledDiv = styled('div')`
 			border: 0;
 			width: calc(100% - 300px);
 		}
+	}
+
+	p {
+		margin-top: 0;
 	}
 `;
 

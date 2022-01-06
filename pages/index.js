@@ -1,21 +1,21 @@
 import Layout from '../components/PageLayout';
-import { MetaData } from '../staticData/MetaData';
+import { homePage } from '../staticData/MetaData';
 import Link from 'next/link';
 
+const repoLink = "https://api.github.com/search/repositories?q=created:>2017-01-10&sort=stars&order=desc"
+
 // runs on server side,
-export async function getStaticProps(){
-  return {
-    props: {
-      MetaData
-    }
-  }
+export async function getStaticProps() {
+	return await {
+		props: {
+			homePage,
+		},
+	};
 }
 
-export default function Home({
-  MetaData: { homePage }
-  }) {
+export default function Home({homePage}) {
 	return (
-		<Layout siteMetaContent={homePage} homePage>
+		<Layout homePage>
 			<article>
 				<h1>Frontend Coding Challenge</h1>
 				<h2>Introduction</h2>
@@ -60,9 +60,12 @@ export default function Home({
 					fetching the most popular repositories:
 				</p>
 				<code>
-          <Link href="https://api.github.com/search/repositories?q=created:>2017-01-10&sort=stars&order=desc" replace>
-            <a target="_blank">Link to github Repository</a>
-          </Link>
+					<Link
+						href={repoLink}
+						replace
+					>
+						<a target="_blank">Link to github Repository</a>
+					</Link>
 				</code>
 				<p>
 					We will really value: concise and clean code, use of semantic HTML,
@@ -88,9 +91,9 @@ export default function Home({
 					handed in the incomplete file.
 				</p>
 				<p>
-					On the other hand, I also think it is important to submit &#145;finished&#146;
-					code so that you can imagine that I would not commit just anything into
-					a repo.
+					On the other hand, I also think it is important to submit
+					&#145;finished&#146; code so that you can imagine that I would not
+					commit just anything into a repo.
 					<br />
 					So I invested another 1.5 hours to program a handover version
 					(table_updated.html).
