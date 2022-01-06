@@ -3,7 +3,7 @@ import { unmountComponentAtNode } from 'react-dom';
 export const isolateRenderTest = (containerElement) => {
 	beforeEach(() => {
 		// setup a DOM element as a render target
-		container = document.createElement('div');
+		containerElement = document.createElement('div');
 		document.body.appendChild(containerElement);
 	});
 
@@ -18,17 +18,16 @@ export const isolateRenderTest = (containerElement) => {
 export const isolateTimerTest = (containerElement) => {
 	beforeEach(() => {
 		// setup a DOM element as a render target
-		containerElement = document.createElement("div");
+		containerElement = document.createElement('div');
 		document.body.appendChild(containerElement);
 		jest.useFakeTimers();
-	  });
-	  
-	  afterEach(() => {
+	});
+
+	afterEach(() => {
 		// cleanup on exiting
 		unmountComponentAtNode(containerElement);
 		containerElement.remove();
 		containerElement = null;
 		jest.useRealTimers();
-	  });
-
-}
+	});
+};

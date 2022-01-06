@@ -1,5 +1,5 @@
 import Layout from '../../components/PageLayout';
-import { MetaData } from '../../staticData/MetaData';
+import { tablePage } from '../../staticData/MetaData';
 import { fetchData, githubURL as url } from '../../components/utils/fetch';
 import { TBody } from '../../components/table/tbody';
 import styled from 'styled-components';
@@ -16,13 +16,13 @@ export async function getStaticProps() {
 
 	return {
 		props: {
-			MetaData,
+			tablePage,
 			RepoData: slicedData,
 		},
 	};
 }
 
-function Page({ MetaData: { tablePage }, RepoData }) {
+function Page({ tablePage, RepoData }) {
 	return (
 		<Layout siteMetaContent={tablePage}>
 			<StyledDiv>

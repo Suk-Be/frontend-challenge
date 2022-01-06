@@ -5,15 +5,30 @@ import styled, { createGlobalStyle } from 'styled-components';
 export default function Layout({
 	children,
 	homePage,
-	siteMetaContent: { title, description },
+	tablePage,
 }) {
 	return (
 		<div>
-			<Head>
-				<meta name="description" content={description} />
-				<meta name="og:title" content={title} />
-				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-			</Head>
+			{homePage && (
+				<Head>
+					<meta name="description" content={homePage.description} />
+					<meta name="og:title" content={homePage.title} />
+					<meta
+						name="viewport"
+						content="initial-scale=1.0, width=device-width"
+					/>
+				</Head>
+			)}
+			{tablePage && (
+				<Head>
+					<meta name="description" content={tablePage.description} />
+					<meta name="og:title" content={tablePage.title} />
+					<meta
+						name="viewport"
+						content="initial-scale=1.0, width=device-width"
+					/>
+				</Head>
+			)}
 			<GlobalStyle />
 			{!homePage && <main>{children}</main>}
 			{homePage && (
@@ -71,10 +86,10 @@ const containerStyles = `
 	max-width: 70vw;
 	padding: 0 1rem;
 	margin: 3rem auto 6rem;
-`
+`;
 const StyledMain = styled('main')`
 	${containerStyles}
-`
+`;
 const StyledFooter = styled('footer')`
 	${containerStyles}
-`
+`;
